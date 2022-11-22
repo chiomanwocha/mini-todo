@@ -30,10 +30,14 @@
             <div class="doing">
                 <h2>doing</h2>
                 <ul v-for="doingItem, index in doingList" :key="index">
-                    <li v-if="doingList[index].isDoing && !doingList[index].isDone">
-                        <input type="checkbox" name="done" id="done" v-model="doingItem.isDone" @change="updateDoingList(index)">
+                    <li v-if="doingList[index].isDoing && !doingList[index].isDone" class="doing-box">
+                        <!-- <input type="checkbox" name="done" id="done" v-model="doingItem.isDone" @change="updateDoingList(index)"> -->
                         <!-- <span :class="{done: doingItem.isDone}">{{doingItem.item}}</span> -->
                         {{doingItem.item}}
+                        <div>
+                            <button @click="doingItem.isDoing = false; undoDoing(index)">Undo</button>
+                            <button @click="doingItem.isDone = true; updateDoingList(index)">Done</button>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -127,8 +131,16 @@ export default {
         this.doingList.push(this.doneList[index])
         this.doneList.splice(index, 1)
         localStorage.removeItem('doneList')
-        localStorage.setItem('doneList', JSON.stringify(this.doneList))
         localStorage.removeItem('doingList')
+        localStorage.setItem('doneList', JSON.stringify(this.doneList))
+        localStorage.setItem('doingList', JSON.stringify(this.doingList))
+    },
+    undoDoing(index){
+        this.todoList.push(this.doingList[index])
+        this.doingList.splice(index, 1)
+        localStorage.removeItem('todoList')
+        localStorage.removeItem('doingList')
+        localStorage.setItem('todoList', JSON.stringify(this.todoList))
         localStorage.setItem('doingList', JSON.stringify(this.doingList))
     },
     editTask(index){

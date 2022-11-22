@@ -106,3 +106,7 @@ li{
     max-height: 50vh;
     overflow-y: scroll;
 }
+.doing-box{
+    display: flex;
+    justify-content: space-between;
+}
