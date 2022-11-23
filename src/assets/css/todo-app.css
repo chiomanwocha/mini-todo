@@ -99,7 +99,7 @@ li{
 }
 .editing{
     display: grid;
-    grid-template-columns: 20vw 5vw;
+    grid-template-columns: 19vw 5vw;
     margin: 0 auto;
 }
 .todo, .doing, .todo-done{
